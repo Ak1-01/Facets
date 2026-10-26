@@ -1,0 +1,1725 @@
+Functionalities/configure / of a product what wee do in a product- define rules and regulations all your excluded services / define processing logic.
+Application support
+	what we select in indicative section - we select check boxes enabled based on application type like dental , vision etc . 
+
+	business info - maps lob to a product . 
+
+	line of business- it is used to tag the income and expenses/ product based on credit and debit info to determine profit/loss
+
+Facets reads the Payment Info of the Servicing Provider. If the Payment is made to the related entity, provider entity relationship is used in claims processing. PRER TABLE\
+
+PROVIDER
+
+PRAD_TYPE_CHECK -Provider Remittance Address Type
+PRAD_TYPE_PRIM- Provider Primary Address Type
+
+PRAD_HD_IND Handicap IndicatoR PROVIDER 
+
+AGAG_CAT Provider Agreement Category (D, M, V)   DENTAL MEDICAL VISION 
+NETWORK
+
+NWPR prefix is created in Component Prefix description  ?????? nwpr table 
+
+In-Area Bypass is set to Yes (Y) to bypass this Network Set row during claims 
+processing when the provider’s zip code falls within a specified range defined in the Zip 
+Codes section tab
+
+
+
+
+Line Of Business (which we create in the accounting group)
+
+2 - primary , secondary (exceptional like UM violation or OON both).
+
+
+Date format -- MM-DD-CCYY format 
+
+search - f7
+
+auto number subscribers auto enabled is in GROUP so when we create subscriber we dont have to give subscriber id system will automatically generate it , accept accumulator transfer also in group 
+
+accum transfer - summing up of amount of OOP expenses for particular plan year
+
+BENEFITS OF FACETS
+
+
+Enterprise wide Integrated Platform
+	Modular Functionality
+	Scalability
+	Flexibility
+Broad and Deep Functionality
+Flexible and Open Architecture
+Automation and Configurability
+Proven track record
+
+
+
+where can you go and see all your user defined values? --- MCTR TABLE
+
+diagnosis codes User warning messages stored in  - IDCD TABLE ?????????????///////
+
+user defined codes stored in     - MCTR TABLE 
+
+parent group info stores in PAGR TABLE 
+
+group info stored in GRGR TABLE 
+
+sub group info stored in SGSG Table  CMC_SGSG_SUB_GROUP
+
+overpayment details - CLOV TABLE   WHERE IS ITTTTTTTTTT? in frontend accounting 
+
+check indicative - CKID TABLE     WHERE IS ITTT?claim
+
+check status - CKST TABLE              WHERE IS ITTTT?    claim 01 , 02 , 11 , 15 , 99
+
+manual reduction - ACRH TAble     ACCOUNING --LINE OF BUSINESS INDICATIVE -- Manual reduction, overpayment , combined checks Auto overpayment recovery 
+
+check reference id - CKPY TABLE  what is it ?????????????
+
+product info gets stored in  PDDS table   CMC_PDDS_PROD_DESC   
+
+business info gets stored in PDDP TABLE PDPD_PRODUCT
+
+Diagnosis Code CMC_IDCD_DIAG_CD
+Procedure Code CMC_IPCD_PROC_CD
+Revenue Code CMC_RCRC_RC_DESC
+
+
+benefit components gets stored in PDBC table
+
+referral reqirement info stored in PDVC table .product variable component 
+
+provider facility ipa relation stored in PRER table .It can define rules of UM regulation.used in claims processing 
+
+ZCIA is attached if Out of area processing is required AIAI<ARar<wmud zcia pRODUCT VARIABLE 
+
+
+ACPR --PAYMENT REDUCTION TABLE
+
+ACRH -- PAUMENTREDUCTION HISTORY TABLE\
+
+ACGI  --PAYMENT DATA
+
+CKCK --CHECK RELATED INFO
+
+CLCK  -- PAYMENT INFOBY CLAIM ID
+
+ACGL  -GENERAL LEDGER ACCOUNT DEFINITION
+
+ACPE -- ACCOUNT BEGIN/END DATE INFO
+
+
+
+
+
+
+
+
+
+
+
+
+
+Group
+
+
+IDCD   --- select * from CMC_IDCD_DIAG_CD 			   	 |Diagnoisis code  
+
+IPCD   --- select * from CMC_IPCD-PROC_CD				 | Procedure Code
+
+RCRC   --- select * from CMC_RCRC_RC_DESC				 | Revenue Codes
+
+AIAI   --- select * from CMC_AIAI_ADM_INFO  where PDBC_PFX = 'AI01' 	 |admininstrative info  PCP
+
+ARAr   --- select * from CMC_ARAR_CERT_RULE where PDBC_PFX= 'AR01'  	 |administrative rule member COB
+
+
+
+DUMD   --- select * from CMC_DUMD_DUP_EDIT                          	 |duplicate claim rule medical 
+
+DUUM   --- select * from  CMC_DUUM_DUP_EDIT                         	 |duplicate UM rule 
+
+WMUD   --- select * from CMC_WMUD_USER_MSG                          	 |user defined warning messages 
+
+WMWM   --- select * from CMC_WMWM_WARN_MSG where                    	 |trizetto  warning messages
+
+PRODUCT 
+
+Pdbc   --- select * from CMC_PDBC_PROD_COMP where PDPD_ID= '10000001'    |product INFO benefit components like AIAI ARAR etc.
+
+PDDS   --- select * from CMC_PDDS_PROD_DESC where PDPD_ID = '10000001'   | product description
+
+PDBC   --- select * from CMC_PDBC_VAR_COMP  				 |e components BENEFIT COMPONENTS
+
+PDVC   --- select * from CMC_PDVC_					 |  VARIABLE COMPONENTS
+
+SEPY   --- select * from CMC_SEPY_SE_PYMT where SEPY_PFX = '001C'        |service payment info 
+
+DEDE   --- select * from CMC_DEDE_DEDUCT where DEDE_PFX = 'DE01'         |deductible info 
+
+LTLT   --- select * from CMC_LTLT_LIMIT where LTLT_PFX =  'LT01'	 |Limit info 
+
+NWST   --- select * from CMC_NWST_NET_SET 			         |Metwork SEt
+
+GPAI   --- select * from CMC_GPAI_GRP_ADM                                | Stoppage waitiing period info stored here	
+
+CSCS   --- select * from CMC_CSCS_					 | class table 
+
+CSPI   --- select * from CMC_CSPI_CS_PLAN  				 |class plan
+
+NWNW   --- select * from CMC_NWNW_NETWORK where NWNW_Id  = 'NW07aJ'      | Network Table 
+
+PRCP   --- select * from CMC_PRCP_COMM_PRAC 				 | common practitioner details
+
+
+PROVIDER 
+
+PRPR   --- select * from CMC_PRPR_PROV where PRPR_ID  = 'C0700023'   	 | provider info
+
+PRAD   --- select * from CMC_PRAD_ADDRESS where PRAD_ID = 'PAD022'     	 | provider address upto 60/provider
+
+NWPR   --- select * from CMC_NWPR_RELATION 				 | NEtwork provider relation
+
+PRER   --- select * from CMC_PRER_RELATION 				 | provider IPA relation
+
+MCTI   --- select * from CMC_MCTI_INFO where MCTI_ENTY_Id = 'dj383'	 | tax /provider relation
+
+MCTN   --- select * from CMC_MCTN_TAX_NAME where MCTN_ID = 'MC3939'      | tax info ,name data
+
+PRFA   --- select * from CMC_PRFA_FACILITY 				 | facility info AHA, AMA, AVG ROOM RATE
+
+PRCR   --- select * from CMC_PRCR_CREDEN				 | credentialing info (global0
+
+AGAG   --- select * from CMC_AGAG_AGGREMENT       			 | Aggrement 
+
+
+subscriber 
+
+SBSB   --- select * from CMC_SBSB_SUBSC					 | subscriber info 
+
+SBSG   --- select * from CMC_SBSG_RELATION				 | subscriber subgroup relation
+
+SBAD   --- select * from CMC_SBAD_ADDR 					 | subscriber address Home(mandatory)/mail/others  
+
+SBEL   --- select * from CMC_SBEL_ELIG_ENT where SBSB_CK = '24244'    	 | subscriber level eligibility
+
+MEEL   --- select * from CMC_MEEL_ELIG_ENT				 | member level events eligibility select , change , terminate 
+		
+MEPE   --- select * from CMC_MEPE_PRCS_ELIG where MEME_CK = 24235'	 | member level eligibility to know if member got terminated 
+
+MEPR   --- select * from CMC_MEPR_PRIM_PROV where MEME_CK = '19373'  	 | member pcp details - this tab is in  member elegibility
+
+MECB   --- select * from CMC_MECB_COB where MEME_CK = '345224'   	 | member COB details	this tab is in  member elegibility
+
+MEHD   --- select * from CMC_MEHD_HANDICAP				 | member if handicap details		" "	" "
+
+MEST   --- select * from CMC_MEST_STUDENT				 | member if student details		" "	" "
+
+MEMD   --- select * from CMC_MEMD					 | sbscriber medicare info 		" "	" "
+
+
+Service Conversion
+
+SECT   --- select * from CMC_SECT_CONV					 | service code conversion
+
+TPCT   --- select * from CMC_TPCT_CPT_CONV				 | service procedure conversion PREFIX
+
+RCCT   --- select * from CMC_RCCT_CONV					 | service revenue conversion 
+
+SPCT   --- select * from CMC_SPCT_SUPP_CONV where SESE_ID = 'VO'	 |exact service id 
+
+SESE   --- select * from CMC_SESE_SERVICE				 | service rule  n no. 
+
+SESP   --- select * from CMC_SESP_PENALTY				 | penalty info  in service rule 
+
+SETR   --- select * from CMC_SETR_TIER					 | copay coinsurance defined in service tier in service rule 
+
+SERL   --- select * from CMC_SERL					 | service related info additional info RELATED ID 
+
+SEDF   --- select * from CMC_SEDF_SF_DEFN				 | service definition info  mapped in product and aggrement
+
+SEPC   --- select * from CMC_SEPC_PRICE					 | service pricing max allow amt. based on procedure tiers 
+
+
+IPRS   --- select * from CMC_IPRS_PRICE					 | R&C schedule medical rate will differ for single proc code for single SEIP_PFX..
+
+IPTR   --- select * from CMC_IPTR_PROC_TIER				 | procedure tier
+
+
+AGGREMENT
+
+
+AGAG   --- select * from CMC_AGAG_AGGREMENT				 | aggrement info
+
+NSRS   --- select * from NWX_NSRS_RTE_SHT				 |aggrement administrative info NSRS_RATE_SHT_ID(PK)/DESC/EFF_DT
+
+NRST   --- select * from NWX_NRST_RS_TERMS    				 |contract terms defined in aggrement
+
+NCGP   --- select * from NWX_NCGP_CD_GROUP 				 | Qualifier group info NCGP_CODE_GROUP/ID/NAME, NCGP_EFF_DT
+
+NCGV   --- select * from NWX_NCGV_CD_VALUE				 | value defined in QG
+
+
+
+CLAIM
+
+CLCL   --- select * from CMC_CLCL_CLAIM where CLCL_ID = *******		 | claim info  MEPE_EL, CSCS_ID,CSPI_ID,PDPD_ID, MEME_REL,NWPR_PFx,AGAG_ID,PDBC_PFX
+
+
+CKPY   --- select * from CMC_CKPY_					 |  claim payment table has Claim Reference ID and Amount link with CLCL as CLCK_ID
+
+
+CDML   --- select * from CMC_CDML_CL_LINE where CLCL_ID = *******	 |claim  Line level details medical  (POS DIAG/PROC code DOS, UNITS, 													LOBD_ID,PRPR_ID,MEME_CK,LOBD, 																CUR_STS,SEPY_PFX,LTLT_PFX,DEDE_PFX,SEPC_PRICE_ID,SESE_ID, 												SESE_RULE,CDML_CHG_AMT = total charge, CLCL_TOT_Payable - BEnEFIT AMOUNT
+
+
+
+CDDL   --- select * from CMC_CDDL_CL_LINE where CLCL_ID = *******	 |line level details dental
+
+CLOV   --- select * from CMC_CLOV_					 | claim overpayment details , original claim , difference amount
+
+ACPR   --- select * from CMC_ACPR_PER_DTS				 | Payment Reduction Table Accounting Period /Start/End Date for calc
+										for tracking ACPR_ID + overpaid amount
+
+CLST   --- select * from CMC_CLST_STATUS  where CLCL_ID = ******	 | history of claims changes and saved CLST_STS
+
+CLMD   --- select * from CMC_CLMD_DIAG	where CLCL_ID = *******		 | claim diagnosis code medical  info IDCD_ID, MEME_CK
+
+CDOR   --- select * from CMC_CDOR_LI_OVR where CLCL_ID = *******	 | line level override CDOR_OR_ID/AMT/VAL
+
+CLOR   --- select * from CMC_CLOR_LI_OVR where CLCL_ID = *******	 | claim level override / bypass in claims 
+
+CCLB   --- select * from CMC_CCLB_CL_COB where CLCL_ID = ******* 	 | claim level COB  MEME_CK		*****
+
+CDBC   --- select * from CMC_CDBC_LI_COB				 | line level COB  MEME_CK		*****
+
+
+CKCK   --- select * from CMC_CKCK_					 | check details related info
+
+
+MATX   --- select * from CMC_MATX_ACCUM_TXN				 |MEMBER LEVEL ACCUM DETAILS
+
+FATX   --- select * from CMC_FATX_ACCUM_TXN				 |fAMILY LEVEL ACCUM DETAILS
+
+
+CLED   --- 								 | EDI trading partner data
+
+CLEB   ---								 | EOB Amounts and Accumulator Data
+ 
+CLAP   --- select							 | Alternate payee details
+
+ClID   --- selet * from CMC_CLID_INDIC					 | clim level Address details remittance address 		CLID
+
+
+ACCOUNTING
+
+PYBA   --- select * from CMC_PYBA_BANK_ACCT				 | PAyor/IC bank acc. info
+
+PYPY   --- select * from CMC_PYPY_PAYOR					 |payor bank info
+
+ACPR   --- select * from CMC_ACPR_PER_DTS				 | void reductiion  Payment Reduction Table Accounting Period /Start/End Date for calc
+										for tracking ACPR_ID + overpaid amount
+ACRH   --- select * from CMC_ACRH_RED_HIST				 | Payment Reduction History Table
+
+LOBD   --- select  * from CMC_LOBD_LINE_BUS				 | line of business details
+
+ACPE   ---								 | Accounting Begin /End Date
+
+ACGL   ---								 | General Ledger Account Definition
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+In group ----- Id , eff date , client id and Address are mandatory fields.
+
+
+In sub group ----  Id, ef date , Address ,birth date , gender are mandatory fields.
+
+
+In Member   ----suffix,name , birth date, eff date, gender and relationship are mandatory cloumns.
+
+
+Separation even is only avalilable in member section and can be used intead of termination.
+
+
+Claims Pay Hold can be set up at Group /SubGroup Level
+
+
+Related Entities is in Subscriber/Member
+
+
+Elegibility and Covered member detaills are in Class plan definition plan page .
+
+
+Stopage/Waiting Period(that affects elegibility) is tied to class plan definition.
+
+
+where we see void reduction , auto recovery --  ACPR
+
+
+Benefit details are defined in Product.Product is mapped with LOB
+
+
+Remittance advice -- given to provider has etra info like contract info etc.   Eob given to member 
+
+
+claims COB required is in  CBCB medical plan  COB rules Its one of product benefit component. claim level cob = cl
+
+
+ZCIA is attached if OON processing is required.
+
+Payor info is stored in PYPY
+
+
+
+
+
+
+
+Related service id -- service related parameter
+
+
+
+
+
+
+
+TPCT prefix is mandatory for medical products. 
+
+rate guarrantee - rate remains same for certain time frame without any changes.
+
+application server is in system architecture 
+ 
+benefits of using facets  -- 
+
+
+Enterprise wide Integrated Platform
+	Modular Functionality
+	Scalability
+	Flexibility
+Broad and Deep Functionality
+Flexible and Open Architecture
+Automation and Configurability
+Proven track record
+
+								S7zec3Zccn
+
+
+
+Related Entities -- is  in Group    we establish carrier id in this, carrier id used in ENROLLING member  indicative
+
+Related ID -- Diagnosis code 
+
+
+
+Is Subscriber/Member and a group Valid Entity?
+CMC_SBSB_SUBSC CMC_GRGR_GROUP
+
+
+Does a valid Class/Plan exist?
+CMC_CSPI_CS_PLAN
+
+Is member Eligible?
+CMC_MEPE_PRCS_ELIG
+
+Eligibility is calculated based on 
+• Group Effective Date
+• Subgroup Effective Date
+• Class/Plan and Product Effective Date
+• Subscriber Effective Date
+• Member Effective Date
+• Effective dates of Class and Subgroup relation with Subscriber
+• Effective dates of events added at Subscriber and Member Level
+• Stop Ages/Waiting Period ID’s
+
+Eligibility Inquiry tab displays the eligibility details of all member under the subscriber
+The period during which “Eligible” value is set as “Yes” is considered the benefit coverage period of membe
+
+
+terminate elegibility
+	At subscriber level, for subscriber and all associated members
+	At member level, for individual benefits of a member
+	After a Select event
+	For single product category or for al
+
+
+
+
+
+CMC_MECB_COB 
+			This table stores coordination of benefits information, including the type of additional coverage, carrier ID, policy, and effective 			and termination dates.
+
+CMC_MEEL_ELIG_ENT 	
+			This table stores information for each member's eligibility events including the effective date, type of eligibility event, plan and 			product category.
+
+CMC_MEME_MEMBER 
+			This table stores indicative information on the member including name, relationship, suffix, and original effective date. For a 			member's address information, 
+
+CMC_MEPE_PRCS_ELIG 
+			The MEPE table is the major source for all processed eligibility information for all members in Facets. It contains contiguous 				historical details on each member's eligibility events: Select, Changes, Terminations, etc. MEPE determines eligibility for cl
+
+CMC_MEPR_PRIM_PROV 
+			This table stores the history of each member's selected primary care provider (PCP) 
+			relationships, including the effective and term dates of the member's relationship with the 
+			provider, the PCP type (Medical Primary (MP), Medical Gynecologist (MG)
+
+CMC_MEST_STUDENT
+			This table stores information used to determine eligibility for members who are students. 
+			It stores information such as the school name, full/part-time status, verification information, and effective and term dates.
+
+CMC_MEHD_HANDICAP 	
+			This table stores information related to a member's handicap such as type (Permanent, 
+			Temporary, In Question), description, and effective and term date
+
+CMC_MEWM_ME_MSG 	
+			Table maintains the effective dated Member warning messages
+
+
+
+
+
+Applications - Subscriber/Member - Group - Address 
+
+Currency field format 0.00  - Applications -> medical claims processing -> line items
+_E
+telephone IS IN - group -> address 
+
+Windows - reset navigation layout.
+
+Data dictionary is inside help section .
+
+
+
+Application -- Application Support 
+		procedure code - ADD MODIFIERS  HCPCS healthcare common procedure coding system      		IPCD TABLR
+
+
+		revenue codes - action -W/D/E --explanation  , error codes - if outside eff term period        	RCRC TABLE
+
+
+		user warning messages no. - message , via User warning message(medical /Dental)   		
+
+
+		diagnosis code , ICD-9/10 can be related using [ related id ] 					IDCD TABLE
+
+
+		explanation codes- 										EXCD TABLE
+						trizetto defined  -CDPNUTS S -subscriber,small letters , numers
+						user defined --3 purpose (informational , Disallow, Override)
+
+		user defined codes , 										MCTR TABLE
+
+		place of service - inpatient -24 hrs, outpatient - no bed admission 
+												MEDICAL-	PSCD TABLE
+												DENTAL -	PSDC TABLE
+
+
+		hospital bill code definition -room codes used for billing purpose , all hospital services , out/in 	HBCD TABLE
+
+procedure code - 
+		user warning messages, 
+		effective date ,
+		termination date 
+		action W/E/D- explanation ,
+		Alternate Ids
+
+Diagnosis code - same as pc 
+		 related id - eg - fever , typhoid fever - related id to relate , 
+		 service conversion category , 
+		 major diagnosis category code - specific to a gender M/F,
+		 user defined messages desc same in dc AS PC.
+
+
+Application - subscriber /member --> group , 
+
+
+Subscriber
+• Enrollment
+• Indicative details (SBSB)
+• Address (SBAD)
+• Class Relation (SBCS)
+• Subgroup Relation (SBSG)
+• Eligibility (SBEL)
+• Warning Message (SBWM)
+
+
+
+• Members
+• Indicative details (MEME)
+• Address (SBAD)
+• Member Provider (MEPR)
+• Eligibility (MEEL, MEPE)
+• COB (MECB)
+• Student Details (MEST)
+• Handicap Details (MEHD)
+• Warning Message (MBWM)
+
+
+
+VIP COde - is in  group , user defined codes same values and many other places
+
+user defined codes - MCTR codes - same drop down but differs from client/client
+
+its category and type
+user warning message description WMUD TABLE   in application support for particular record type like procedure or diagnosis code 
+its a record type
+
+
+service conversion category is in - diagnosis code,
+			        place of service -used in claims processing ,
+				practitioner (indicative)
+				lob (CREATED IN ACCOUNTING)
+				facility
+				provider group 
+				IPA
+
+
+	
+hospital bill code definition -room codes used for billing purpose , all hospital services , out/in 	HBCD TABLE
+			
+
+
+hospital  bill code service is in  SPCD TABLE  - used for hospital billing codes inpatient /outpatient  SPCD TABLE 
+
+
+conversion date - date of transfer of data from any system like legacy system to facet system  .IT IS IN .................? GROUP
+
+
+parent group id -- TRNPG 
+group id -- TRNGR99
+name - FFP training March Test PG practice
+
+
+
+GROUP
+
+bill level is defined in the group
+
+
+Adjusted months  in group is to limit how long claims can be accepted or adjusted
+
+related  entities also defined in group
+
+GROUP -- 
+	bill level ,
+	 adjusted months ,
+	 related entities,
+	 rate data
+	 claims pay hold ,
+	 incoming accums ,
+	 tcs letters
+
+ -
+	with classic screen we cant identify mandarory fields only in web screens we can identify . required field in data dictionary will tell if its 	mandatory or not . facets data dictionary excel sheet
+
+
+
+	To find member pcp details - MEPR table , SBSB table , MEME table 
+
+
+	TO GET Active/current  member PCP details - MEPR table , eff.date , term date, 
+
+
+	pended claims without error as of current date for particular subscriber -  claims table, subscriber, clcl table has prpr_id claims received date 	should be less than or equal to current datee
+
+	memeber elegible or not - MEPE 
+
+	eligibility type or events - MEEL/SBEL
+
+	exit services - SERVICES that needs to be processed before leaving control            IT IS IN .................?
+
+
+	Terminate Elegibility is in Subscriber Family ELEGIBILITY EVENT TERMINATE LIKE SELECT 
+
+	where we define bill levels - group subgroup
+
+CLASS
+
+	class need to be created under a group
+
+	order of configuraton - plan - product - class plan
+
+	covered member indicator - under class plan def does process get impacted - no just for informational purpose .  
+				also in subscriber --> subscriber page    3rd occurence IS subscriber elegibility family indicator   IT IS IN ......?subscriber ->subscriber family
+
+
+	stoppage / waiting period define in medical plan used in class plan- staart of coverage , end date of coverage.   IT IS IN .....? CLASS--> PLAN 
+	what it determines - elegibility of member . 
+	
+
+class plan definition is under medical plan domain
+
+TPCT prefix is mandatory for all medical products.
+
+rate guarantee - rate remains same for certain time frame.
+
+
+
+ASO --  administrative service only comes under class plan [product]
+
+Min 1 and Max 2 LOB can be mapped to a product .  usedd to track your financial transactions profit/loss
+
+LOB is created in under accounting group > LOB determines how your claims are going to be processed.
+
+payor id is in LOB and it will be mapped to a Bank ID.
+
+accumulator suffix is used while mapping  LOB of acccounting to product to keep count of OOP expenses  
+
+
+inn  product we choose application type based on which warning messages comes benefit component like AIAI Aand pre auth
+
+
+
+
+NPA - national provider identifier unique number given by govt. to a provider 
+
+SSN ..\social security number 
+ 
+Product -- -- 	 indicative ,
+		 business info ,
+		 variable components, components-- [AIAI ,ARAR -, prefix -created in AIAI/ created in ARAR , eff.date , term date].[ARAR-], 
+		 capitation rate factor
+
+product --	 application type ,
+		 product ttype,
+		 business category,
+		 premium indicator
+
+indicative - check boxes of application types , 
+		prepricing UM claim processing ,
+		 predetermination, importance - 
+
+
+
+
+AIAI -  (primarily defines claims processing provisions)
+	
+
+ 	is in medical plan administrative information    PCP required Y/N is in AIAI When you select the PCP Required check 								box,Facets displays a warning message at enrollment and during Claims 								Processing or Prospective UM processing that a PCP is required.
+
+	zero charge claims - provider gets paid via capitation still submits claims for tracking purpose
+
+	Timely filing claim acceptance - in AIAI - time limit to submit claim by provider low date of service - start date/END DATE  							of treatment/SERVICE
+
+	MEMber level  COB required  is in AIAI member should provide primary coverage, secondary coverage
+
+
+	WARNING MESSAGE CONDITIONS - to review mEmber current status in case of injury if still  handicapped or not 
+
+	SAME DAY SURGERY - action , coinsurance level - secondary , tertiary . , Explanation ,assistant surg
+
+
+	DRAG PROVISION - end of every month when payment is done ,
+			 payment frequency , 
+			 base date - claim accepted, claim received
+
+	processing exception - in emergency we can bypass preauth 
+
+
+ARAR - 
+	its in medical plan administrative rules , provider requirement  criteria
+
+	whether primary diagnosis code is mandatory or not  (maybe during claims processing )
+
+	pre auth notifications required
+		* in case of emergency go with pre auth timing if um bypass is not selected in AIAI
+		*days before service for outpatient , 
+		*days before admission for inpatient
+
+DUMD -
+
+	exact match
+	partial e match 
+	duplicate , partial duplicate criteria select criteria based on which we match if claims are duplicate or not 
+	if partial generate warning messages 
+	if exact deny claim and give explanation 
+
+CBCB 
+
+	- coordination of benefits rules COB rules  type - commercial , medical 
+
+	COB APPLICABLE WHEN A MEMBER HAS MORE THAN 1 HEALTH PLAN
+
+	cob  calculation method 
+
+	INCLUDED SERVICES  LIKE ALL OR LISTED  THEY ARE LISTED IN TABS IN cbcb   clcb -claim level cob
+
+	claim  level cob entry - in every claim should COB details be published or not it will look for COB entry 
+
+
+
+	CLAIM LEVEL COB IS IN COB rules in  medical plan product benefit component  CBCB , MEMBER LEVEL COB IS in AIAI 
+
+
+
+	OOP include or not - coinsurance , deductible
+
+	ACCUMULATORS, 
+	ACCUMULATION RULES DESCRIBED HERE .
+	RESTRICTION 
+
+DUUM
+ 
+	duplicate management rules
+
+	preauth confinement ,
+        referaal conmfinement for inpatient services .
+	preauth services ,
+	referral services for outpatient services .
+
+WMWM
+
+	warning messages   trizetto inbuilt warning messages comes with the product
+
+WMUD 
+	user warning messages record type wrt client can be addded for group codes etc 
+
+
+
+
+	variable components - behave differently for different claims scenario.
+			*service payment sepy indirectly defines copay and coinsurance 
+			*deductible  dede table 
+			*limit  lili table 
+they depends on 
+		provider status 
+		referral status
+		pre-auth status
+variable components subsection - 
+			  provider ,
+			 pre auth ref, 
+			 related prefix ,
+			 LOB indicator
+
+top tp bpttom left to right 
+
+36 variable components can be added for a single tier type coimbination 
+ for 1 provider status we have 9 rows.
+
+dependency of tier - we have to match the tierno. we have to do claim pricing .we can have many tier combination with 1 type
+
+pdbc seq no. -- order in which rows are inserted into the table .
+
+pdbc tier - 1 , 2 .. pdbc type - blank means standard . 4-5 options such as OON 
+
+Limit - max amount covered by the insurance company 
+
+
+provider types - 
+	practitioner , common , others 
+	facility >  PRFA table
+	provider group >
+ 	IPA G/P/F 
+ 	stored in PRPR  table PRER entity stores relation between them G/P/F/IPA (single byte)
+
+
+	common practiotioner record stored in PRCP Table like credentialing NAME,DOB, EDU, QUALIFICATION etc
+
+
+	
+provider credentialing details stored in PRCR Table . 
+
+
+credentialing for prac PRCR_ID = PRCP_ID
+	      for others PRCR_ID =PRPR_ID
+
+how to link provider and credentialing table  --  prcr id = prpr id
+	
+	
+
+
+primary address is for official work purpose can have multiple practice address but only 1 primary address
+
+remittance address -naddress where payment will be made it can be primary as well
+
+
+PRAD TABLE stores address
+PRAD ID = PRPR ID
+PRAD_TYPE = PRAD_TYP_PRIM, PRAD_TYP_RMT 
+
+
+PRER TABLE --- (to get provider info in claims )
+
+		 PRER_ID, 
+		 PRER_PRPR_ENTITY, 
+		 PRPR_ID,
+		 EFF_DATE,
+		 TERM_DATE
+
+
+NETWORK 
+
+
+NWNW TABle ----
+		  PRPR_ID ,
+		  NWNW_ID,
+		  NWPR_PFX, 
+		  PCP ,
+		  AGAG_ID,
+		  EFF_DATE,
+		  TERM_DATE
+
+
+NWST its in medical plan used in provider to get provider status(related to member PCP, specialist, participating) compare with NWPR and NWNW 
+
+
+Network Set prefix gets mapped in the class plan product  CSPI TABLE 
+
+
+
+NWST TABLE ------
+		 NWST_PFX ,
+		 NWNW_ID,
+		 NWPR_PFX, 
+		 PROVIDER STATUS,
+		 TIER ,
+		 prpd_id
+
+
+tier will be maped in product variable component  - 
+
+role - variable components are created based on tier type combination tier no. when claim processes we go with product id to identify variable componebnt
+
+ tier no. in NWST table  will be considered for claims processing 
+
+provider status is used in claims to determine the allowable amount for payment like PCP / specialist/ OON/ IN
+
+nwnw_id + nwpe pfx
+
+
+TAX information is stored in MCTR Table 
+
+
+NPI - national practitioner Id  unique no. given by government to every provider stored in common practitioner under provider after credentialing 
+
+
+common practitioner  - (demographic info , for credentialing doesnt affect processing logic)
+
+
+		indicative  -
+				  NPI , 
+				  tier,
+				  citizenship , 
+				  credential dates , 
+				  termination date ,
+				  SSN 
+	 	affiliation  --   
+				  provider_id ,
+				  previledges , 
+				  speciality 
+	 	certification -
+	 	language - practitioner canspeak
+
+	 	malpractice coverage - provider pays premium not mandatory to cover for malpractice coverage by provider 
+	 	Q A - quality assurance  
+	 	practitioner - view only page it shows how many practitioner records gets matched with single practitioner .
+	 
+practitioner  -
+		indicative same as common - 
+					preauth required in IPA AND PG 
+					service conversion category
+					speciality
+					practice type
+					
+					capitation cycle ID 
+							
+		address
+		covering provider
+
+		preauth required in IPA AND PG 
+
+		IPA
+		global capitation
+		provider group
+		networks nwpr
+		oon, 
+		payment info, 
+		prepay accumulator - advance pay as capitation process
+		program - if practitioner is part of any program like learning etc
+		referral provider
+	
+		tax info stored in MCTN MCTI created based on employer info or SSN
+
+		MCTI stores info of which provider is mapped with which tax id and tax id creation info stored in MCTN
+
+		claim pay hold  -any processed claim  payment if it is to be on hold its also in memeber , in group check box
+
+		alt payee to get ayment if provider cant receive 
+		tax info MCTI
+		sponsoring 
+
+facility 	
+		same as practitioner +
+		facility info
+	 	beds info
+		staff info
+	
+IPA 		same as practitioner +
+		pre auth required dropdown
+		service conversion category
+		service area
+		encounter stoploss setup by IPA
+		provider relation code
+		hierarchy value relationship  which provider will be priority
+
+
+credentialing id is equivalent to or same as common practitioner id for practitioner .
+
+how to link provider and credentialing table  --  prcr id = prpr id
+
+
+under subscriber/member 
+
+	1. - application type - you can do only new enrollment u cant open existing enrollment and make changes to it. for temproary staff during open 					enrollment 
+	2.  - subscriber family  -  also in subscriber/member - we can enroll in subscriber family same thing.we can open and change in existing 
+
+
+to create Subscriber -  Ctrl O group id then subscriber_id is auto generated because check box in group auto number subscriber is enabled .
+
+
+
+
+
+Enrollment  -
+		 last name,
+		 first name 
+		 gender 
+		 conversion date 
+		 eff. date ,
+		 term date,
+		 phone,
+		 zip code, 
+		 check payment options - claims,
+		 FSA (multiple checks can be clubbed and made in single payment or not ), 
+		 retiree date, status ,
+		 VIP type - user defined codes ,
+		 processing status - hold /process immediately
+
+
+		ID, Name, Address, Birth Date, Effective Date, Gender are mandatory columns.(SBSB)
+
+		Class Relationship is mandatory to setup eligibility (SBCS).
+
+		Payment Info section holds the EFT information for Subscriber payment
+
+		user warning messages--This gets displayed up in various processing applications such as Claims, UM, Customer Service etc., (SBWM)
+
+
+
+
+
+covered member - class plan in plans page - CSPI table  ,,,,subscriber elegibility
+
+subscriber enrollment 
+
+  		we need to map subscriber to sub group mandatory by going into subgroup .subscriber subgroup relation is stored in SBSG table .
+
+
+	subscriber info gets stored in CMC_SBSB_SUBSC - this is only page which have subscriber ck and subscriber id . SBSB_CK , SBSB_ID
+
+
+prad and prpr table is joined using - prpr_id = prpr_id and prad_type = primary or 
+
+
+
+subscriber
+	*subscriber -to add subscriber '
+
+	*member - to add member 
+
+	*address - to give address , 3 address in meme table (home)primary , work , mail can add more addresses SBAD_TYPE_HOME/MAIL/WORK we can choose mMember address from one of the subscriber address
+
+	*subgroup - to map subgroup
+
+	*class - to add class/ plan to a subscriber
+
+	*elegibility - plan id 7 elegibility events for subscriber 8 for member events 
+
+			for subscriber -- select ,change, terminate, reinstate, cobra begin, cobra end ,plan entry override
+			for member     -- select , change , terminate , reinstate , SEPARATION , cobra begins , cobra ends , plan 														entry override 
+			
+				subscriber level elegibility event is stored in SBEL table
+
+				meme_sfx and meme_rel in meme table used to uniquely identify relation of member with subscriber -00 				sposuse -01, 02-09 others bcoz subscriber_id is common for entire family
+
+
+			cobra - reduced working hours, death/divorce  of employee, termination of employment  for employee - 18 months for member 36 months
+
+
+			to check if member is active or eligible for a given date range check MEPE_ELIG_IND =N/Y 
+		 	at billing level in mepe table
+
+ 					MEPE_BL_ELIG_IND_NVL to know if member got terminated.
+
+
+			stoppage and waiting period is in class plan / plan section , coverage begins date also
+
+
+	*FSA Accum ,HSA ACUum, HRA ACCUm of member if he has any CDSP plan active     Gpe1hyIThk       S7zec3Zccn
+
+	*RAte DAta - to rate based on location 
+	
+	*Rating / premium override 
+	
+	*expanded split billing  - if a particular bill is to be paid between two or more different member 
+
+	*salary details 
+
+	*payment info - bank acc details
+
+	*auto actions
+
+	*debit card
+
+	*subscriber level user defined message
+
+	*EE contrbution employee 
+
+	*Alt payee
+
+
+Subscriber-
+	Member
+	Auto actions
+	Terminate Elegibility
+	
+		
+
+
+		- 
+		Name , Birth DAte
+		Gender , Gender Identity
+		SSN
+		Hire Date
+		Employee Id
+		Status - Active , Deceased , Premember,Terminated, Retired 
+		Marital Status
+		Conversion Date - date conversion date of facet system
+		Signature Date
+		Recieved Date - claim recieved date
+		Processing status also in enrollment 
+		claims
+		
+		
+
+
+
+
+MEMBER --
+-			Suffix, Name, Birth Date, Effective Date, Gender and Relationship are mandatory columns. (MEME)
+
+			Add/Change member level eligibility events in Eligibility Section. Attach Class, Plan with Effective date. (MEPE, MEEL)
+
+
+
+	* PCP type 
+
+	* pcp id we add in subscriber/ member under member under pcp sub section. we can have multiple pcps 
+		 S20 error - find in explanation codes 		
+		 pcp adding date is before member active date.
+		 member pcp details stored in MEPR TABLE
+
+
+
+	*conditional elegibility - preexiating condition to be added
+				   allows used to establish Coverage Exclusions, Pre-existing conditions, Other Party Liability and coverage extensions.
+					
+
+	• Plan ID, Diagnosis Code, Condition Type, Product Category and Effective date are mandatory details
+
+	*COB - non duplication of benefits   STORED IN MECB TABLE
+			insurance type
+			carrier id - is pre-established in Related Entity Application
+			order
+			Supplemental drug conversion
+			Eff.Date
+			
+
+		member level cob required is in ---> AIAI   if selected then enter details here -- carried id order (primary / secondary), details , 				verification , 	primary COB policy holder 
+
+	*handicap -- temporary /permanent MEHD table , verification
+
+	*student   -- full time or part time MEST table 
+
+	* responsible  person -- guardian 
+
+	* dempgraphic area
+
+	* member level warning message
+
+	* lifestyle - cronic condition like smoking asthma HIV, diabetes , asthma LIFESTYLE CODE created under user defined codes application stored in MCTR 			
+	* communication preference 
+
+	* claims pay hold also in practitioner and in member also checked in group 
+
+	* medicare verification ,
+
+	* interface,
+	
+	* carrier ,
+
+	* retiree subsidy, 
+
+	* facilitator - to add medicare - edit add new medicare member.Alt f9
+				--medicare no. ,
+			 	PBD_ID ,partA, partB, part D date, 
+				signature date - which day u received this application , 
+				election type - which enrollment period member is enrolled in this 
+				RX -for  part D 
+				 medicaid checkbox
+	* medicaid 
+
+	* provider relationship
+
+	* risk score 
+
+	* immunization/ health screening
+
+	* user warning messages -shows in  Claims, UM , cust serv  MEWD
+
+
+
+void coverage - enrollment is cancelled. void indicator [VOID EVENT] -
+				 is in elegibility section in subscriber/family in subscriber application once void it cant be reverted. 
+			
+how to  do - subscriber/family - action - void coverage - category (5), give reason ,, CMC_SBEL_ELIG_ENT
+
+
+enrollment -model - can create a member like existing member like sample copy data and update for enrollement type 1 
+
+
+
+SERVICE CONVERSION -
+
+		
+		need - for capitation OOP cost, treatment varies , service id derived on that benefit amount is derived
+
+		create all posible service id in service id description application sedf  in medical plan SEDf TABLE 286+ IDs'
+
+
+
+Which application it searched when it cannot find services through enter the service/prodedure code conversion application -- SECT
+		3 step
+
+1ST STEP BASIC CONVERSION - to create TPCT prefix we map in class plan definition indicative page  CMC_SECT_CONV
+	
+	service code conversion  (SECT) -- pick handful of services for ur product 
+
+					used to determine correct product class and reporting category for a service code during claims processing .
+
+	service procedure conversion  	(TPCT)	mapping procedure code/s /modifiers to equivalent service id CONSIDER IN/OUT
+
+	service revenue conversion (RCCT)   mapping revenue code/s to equivalent service id
+
+
+
+
+there are 286 + service ids we choose and map procedure codes and revenue codes based on our requirement .
+
+
+service conversion category ---
+				 diagnosis code ,
+				 pos , 
+				 practitioner ,
+				 facility , ????
+				 provider group , 
+				 IPA
+
+	setting--> I/ O inpatient outpatient procedure code range
+
+
+we have to enter TPCT prefix in SERVICE CONVERSION DESCRIPTION to map it to class/plan definition
+
+revenue codes used in hospital claims and  for medical claims  we use procedure code thats why they are used differently derived
+
+based on value comparison type differ while adding qualifier group  (NCGP TAble) in service conversion qualifier group  
+
+
+2ND STEP SERVICE CONVERSION RULES  -  map it [SPCR and SRCR] to product >>benefit components(optional) CRITERIA TO PICK UP A CLAIM TO DERIVE SERVICE ID
+
+		supp conv qual group --  we create qualifier group based on proc code and revenue code in supp conv qual group
+
+		supp conv proc rules (SPCR)  -- we map proc code based QG to equivalent service id
+		
+		supp conv rev rules (SRCR) --  we map  rev code based QG to equivalent service id
+
+	
+
+SERVICE CONVERSION PROCESS 
+
+
+SUPP PROC CODE CONV(SPCT)-- based on service id from step1 , consider proc code, modifier , memer age , pos provider type, diagnosis type, speciality --> exact service id
+
+SUPP REV CODE CONV(SRCT)  -- based on service id from step1 , consider proc code, modifier , memer age , pos provider type, diagnosis type, bill type speciality --> exact service id
+
+
+
+service rule definition - indicative SESE TABLE
+
+	
+
+		service payment mapped in variable component indirectly define OOOP 
+		
+
+mapping of service id to service rule - 	SESE
+					amount based --  define copay based on amount 
+
+					counter based -- define copay based on counter units physiotherapy, psychology no. of sittting /visits
+
+					disallow  -- deny entire line items explanation codes
+
+
+
+calculative rule defined in service rule definition application calculation method 
+
+
+PENALTY -- fine,  % amount or flat amount lesser of derived penalty and penalty limit  stored in SESP TABLE EXPLANATION CODES
+
+
+MULTIPLE COPAY AND COINSURANCE IS DEFINED IN SERVICE TIER OF SERVICE RULE  DEFINITION --> INDICATIVE --> SERVICE TIER  SETR TABLE
+
+
+SERVICE RELATED PARAMETERS - SERVICE PENALTY SERVICE TIER 
+
+
+CONFIG ---SERL / SESE(SESP/SETR) / SEPY 
+USAGE   --SEPY /SESE (SESP/SETR)
+
+
+
+SERVICE DEFINITION  - mappinG of service id to pricing     SEDF TABLE 2 PLAES 
+
+			- in product  --> components  / medical plan app group sedf table to determine max allowable amt
+
+			- IN AGGREMENT - FACETS CORE MAP IN- RELATED PREFIX  AS AGSE COMPONENT TYPE  AND IN  NETWORKX - AGSE AGGREMENT SUBSECTION
+				AGG MAPPED TO PROVIDER NETWORK 
+
+
+service id is mapped in aggrement and in product 
+
+		aggrement - AGSE  component type for INN priciing
+
+		product -- benefit component AS SEDF COMPONENT TYPE AS OON PRICING 
+
+aggrement is mapped in provider 
+
+TO CHECK WHETHER PROVIDER IS IN NETWORK WRT INSURANCE COMPANY -- NETWORK TABLE NWPR_ID
+
+OROVIDER STATUS FROM MEMBER PERSPECTIVE WHILE DOING CLAIMS PROCESSING - CHECK NWPR_ID, NWPR_PFX + EFF DATE, TERM DATE, STATUS INDICATOR FROM NWST TABLE
+AND FROM NWPR TABLE PCP INDICATOR AND AGGREMENT ID AS WELL
+
+
+
+SERVICE PRICING 
+		PAY PROFILE amount
+
+		service pointer
+
+		pricing method
+				R&C schedule medical different defined for each procedure code create service pricing prefix 
+				preschedule -- procedure code to rate mapping 
+				RBRBS - resource based on unit value
+				conventional factor times relative value unit 
+		charge rule
+
+		conversion factor
+
+		allowable amount
+
+		procedure tier - No. of units entered in claim line items amount varies calc max allow amt.
+
+
+deriving the amount based on number of units comes under SERVICE 
+
+AGGREMENT - FACETS CORE/NETWORKX
+		
+	FOR FACETS - MEDICAL PROVIDER AGGREMENT APPLICATION GROUP
+
+
+		INDICATIVE --
+				TYPE - ppo , hmo etc
+
+				PROFILE - in service pricing pay profile amoint if enabled defined here directly defining rate in aggrement
+
+				pay  profile -- pricing profile application group  -->fee schedule profile medical --> indicative
+
+				override id
+
+				TIMELY FILING CLAIM ACCEPTANCE (ALSO IN AIAI), drag provosion
+									STANDARD    |DATE  |MONTH |LOW/HIGH DATE OF SERVICE|
+									ADJUSTMENT  |DATE  |MONTH |LOW/HIGH DATE OF SERVICE|
+									COB         |DATE  |MONTH |LOW/HIGH DATE OF SERVICE|
+				RISK WITHHOLD
+
+				pricing type - outpatient /inpatient
+				
+				
+		DISCOUNTS - max/min 
+		PAYMENT DRAG  / drag provision (also in AIAI)
+		RELATED PREFIX -- nservice definition is mapped as AGSE component type 
+		DOFR  0- financial risk
+
+
+	FOR NETWORKX -- NETWORKX APPLICATION GROUP --> Medical aggrement configurator
+										INDICATIVE -- eff.date, term date , 
+												Aggrement on hold 
+												IPHOSP/OPHOSP  contract date 
+												Agg. ID/Desc/Version 
+
+			Aggrement administrative info section  -- Aggrement id (AGAG_ID), + Aggrement Description (AGAG_DESC) + Effective date
+
+			Aggrement Subsection  -- pricing type
+						 Agse service desc 
+						 timely filing claims acceptance - default
+			
+			Aggrement contract section -- 12  , inpatient -5  , out patient - 5  , 1 preprocessing
+
+							rules - qualifier group / type  based on age etc
+							calculations
+							eff date
+							per diem -- per day
+							complex aggrement
+							global aggrement
+
+			Medical FEE SChedule NWX fee schedule - 
+								indicative - if proc code not in then 90% or anything defined will it be considered or not   					go to 	aggrement 
+			used in aggreement if not in fee schedule 1) go with NWX fee schedule price
+								  2) term doesnt apply
+
+
+
+
+Subscriber/FAmily-		
+			coverage exclusion/extension
+			condition type
+			pre existing condition '
+			other party liability'
+			plan id
+			Diagnosis code
+			Eff. Date
+			
+
+
+
+Medical Claims processing/prepricing -	
+
+					indicative- 	
+							subs id
+							suffix
+							member
+							provider id
+
+							Diag codes
+							ICD Version
+
+							Remit info 
+							
+							Referring physician id
+							Related Facility id
+
+					Line items -
+							claim id
+							provider id
+							status
+							payee
+		
+							total charge 
+							patient paid
+
+							TO add a line item 
+									 	-From
+									 	- TO 
+										- proc code
+										- diag code
+										- POS
+										- TOS type of service /service id/service code 
+										- charges
+										- units
+				
+							
+
+							AFA items
+							DOFR
+							Secondary claims
+							Dual line dates
+							Accum limits
+							Duplicate claims
+							Claim details
+							Line items
+							Price calculation
+							Provider Details
+							UM Match details
+							Split payment
+	
+
+indexing in SQL -- index - data object --speed  searching of results in a faster way				
+
+ 
+Medical claims web -- 
+			claim id
+			subs id
+			provider id
+			advanced (rest) stored in claims inquiry read only
+
+
+claim -  Mandatory services for processing a claim ?
+	Provider -> NWPR details, address 
+	Member -> subscriber map with group sub group class plan product do in (elegibility events) produt mapped to (NWST/GPAI), PCP details 
+	service id automatically defined by system based on proc code and diag code 
+	POS
+	DOS
+	Proc Code 
+	Diag Code (12)
+	
+
+
+
+CLaim level cob required defined in ---  Product benefit component COB rules application CBCB
+
+member level cob required defined in  MECB TABLE
+
+
+4 .charge rollup - sum of all line items costs. applicable for some itms , and stored in l1   sepc table 
+					[all inclusion pwe diem/
+						 per case , 
+						DRG pricing types WE DO IN
+		 SERVICE PRICING  - per case per diem , DRG type
+
+
+5 .Duplicate editing -- DUMD exact match - denied 
+
+
+we can derive OOP  from product variable components -	
+							service payment ( CMC_SEPY_SE_PYMT)
+							deductible      (CMC_DEDE_DEDUCT )
+							limit		(CMC_LTLT_LIMIT)
+
+COB details claim level -   CLCB or CBCB
+member level 		-   MECB
+	
+	Configuration		CMC_CBCB_COB
+				CMC_CBSE_COB_IX
+			
+
+
+accumulator 
+		member level -- MATX TABLE    CMC_MATX_ACCUM_TXN
+		family level -- FATX TABLE    CMC_FATX_ACCUM_TXN
+
+
+
+
+claim status -- 	
+		01  -- adjudicated but not paid/  denied 
+		02  -- paid
+		11  -- pended
+		15  -- pended with error
+		91  -- adjusted
+		99  -- closed
+
+WHICH STATUS CLAIM SHOULD BE COSIDERED FOR PAYMENT -- 01 ONLY AFTER PAYMENT -02
+
+claim ending in 00 refers as original claim adjusted --> 01 then 02... till 99
+
+
+allowed amount - 0  claim denied 
+
+compare NWSW AND NWPR for provider status and AGAG_ID 
+
+to get NWST - NWST is mapped to class/plan product -
+ 							we get class plan from member 
+
+
+
+
+
+claims processing -- enter details Line items there enter proc code, diag code ,POS ,units, charges , TOS System will automatically derive Type of  Service
+
+To check for allowed amount go to  
+Pay profile under aggrement . it defines processing logic for calculation of allowed amount
+
+	if its not choose then go to related prefixes under aggrement  and their search for AGSE  service definition transfer there and select the  derived service id  from claims and select equivalent service ids transfer to service pricing (SEPC component) check if procedure tier is defined or not if not check R&C schedule medical (iprs  table )if defined transfer to R&C schedule MEdical enter the procedure code and search for the pointer mapped in service pricing 
+
+
+
+To get variable component use tier no. from comparing NWPR AND NWST) and  based on UM requirement get variable 
+
+
+
+CLST SeQ NO changes everytime we make changes to the claim 
+
+override /bypass - can be done in line and claim level both  in claim leevel we can bypass some fields -- like bypass duplicates edits etc
+
+
+acumulator details  - can be summing of OOP expenses in calender year
+			 member level (MATX)
+			
+			 FAMILY LEVEL (FATX)
+
+
+
+overpayment - CLOV+ ACPR + ACRH +
+
+underpayment --CLCL(claim table ) +CDML(line level details medical) +CLST(claim status table
+
+
+
+
+Accouning --
+	     ACCOUNING --
+			Bank ACCount
+			Payor
+			Accounting Period
+			LINE OF BUSINESS- (LOBD TABLE)
+					 	INDICATIVE -	
+
+							Payor ID
+							 Accounting Period Table ID
+							 overpayment ,
+							 
+							 Claims/FSA/Disability/Comission/Capitation Payment Setting-
+															combined checks
+							 								Auto overpayment recovery 
+							 								Auto Manual Reduction Recovery
+					 Address
+					 Payment Reduction Lag
+
+
+
+
+
+LOBD is mapped with ACPE (Accounting Period) + PYPY from PYPY(PAYOR) we can get PYBA(Bank ACCount)
+
+
+
+
+
+
+SBSB       --> GRGR           --> SBSB    ----> CSCS     ----> CSPI     ----> PDPD -----> NWST(NWNW_ID +NWNW PFX) ----> PRPR ----> PCP/S --> AGAG
+			     |						|
+			      SBSB   --- SBCS				 LOBD -->ACPE +PYPY(PYBA)
+
+
+
+employee --> chennai office --> siruseri --> associate --> heakth plan -->benefits -->	chennai asssociate	--> provider -->       --> Aggrement
+
+
+
+Expanded PDPD
+
+PDDS --> PDPD --> PDBC --> PDVC
+          |
+	LOBD --> ACPE + PYPY (PYBA)
+
+
+
+
+S1 at LOB level -- combine all checks to provider
+S2. overpayment or underpayment 
+
+1..  CLAIM TO CHECK MAPPING --> IN CLCK TABLE -- CLAIMS --> EQUIVALENT CHECK NO.      CLCL -->CLCK
+					  	CLCL_ID + CLCK_REF_ID
+
+
+2..  CLAIM CHECK  ---> CLAIM PAYMENT SUMMARY TABLE
+						 --> CLCL --> CKPY
+
+
+						S2 - 1. CLOV :overpay amt is mapped to ACPR
+						S2.- 2. CLOV + ACPR -->map with CKPY  & --> ACRH
+
+3..  CHECK PAYMENT SUMMARY -->GENERATE CHECK
+						-->CKPY -->CKCK
+							   |
+							    --->PYPY(PYBA) + ACPE + LOBD
+
+4..  CHECK INDICATIVE 	AND 	CHECK STATUS 
+	CKID  			 CKST
+(provider name & add)		(status of check)
+
+
+
+ACPR ID will be created whn there is overpayment or underpayment for tracking - It has ACPR_ID  and overpaid amount, check ref no. and ACRH_ID - manual reduction will happen
+
+
+reference id we can get from ACPR Table ,  	recovery amount we can get from CLOB Table        	how it will be recovered in ACRH Table
+ 
+
+remittance address is used in claims address its in accounting payment  PAYMENT HAS ALL details related to claim adjustment
+
+reduction amount overpayment etc is in PAYMENT REDUCTION TAB
+
+Overpayment recovery, if setup automatically can be bypassed using ooverride option at claim level
+
+
+
+
+
+CMC_CLCK_CLM_CHECK 
+
+			This table contains payment information by Claim ID. It included payee and subscriber 
+			information, as well as amount such as original and prompt payment discounts
+
+
+CMC_CKPY_PAYEE_CLM 
+			This table contains information relating to payments by payment reference id. It includes the 
+			payment source, type, date, payee, period and amount information.
+
+
+CMC_CKCK_CHECK
+			This table contains information relating to a check. It includes payer, dates and amounts
+
+
+CMC_CKST_STATUS 
+			This table contains the status history of a check. It includes the date and user information 
+			relating to each status of the check
+
+
+CMC_CKID_INDIC 
+			This table stores indicative information regarding the address and bank related to the payment
+
+
+CMC_ACPR_PYMT_RED
+			This table maintains all payment reduction rows for a payee within a LOB. These payment 
+			reduction rows can be for overpaid medical claims, overpaid dental claims, or set up as manual 
+			reductions. If set to do so on the LOB table, these reduction rows can automatically reduce 
+			further payments.
+
+
+
+CMC_ACRH_RED_HIST 
+			This table maintains all of the reduction history associated with a reduction row
+
+CMC_ACGI_PAY_HIST 
+			This table stores historical payment data for 835 transactions
+
+CMC_PYPY_PAYOR 
+			This table contains indicative information relating to a payer and includes effective and 
+			termination dates as well as bank account and address information
+
+CMC_PYBA_BANK_ACCT 
+			This table contains the bank indicative information including name, address, 
+			control, routing, transit and last check number
+
+CMC_LOBD_LINE_BUS 
+			This table stores information pertaining to the user’s defined line of business
+
+CMC_ACPE_PER_DTS	
+			 This table stores the beginning and end dates for a user defined accounting period
+
+
+
+
+S7zec3Zccn
+
